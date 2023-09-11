@@ -1,9 +1,12 @@
 import express, { Request, Response } from "express"
+import mongoose from "mongoose"
+
 const PORT=process.env.PORT || 3000
 import dotenv from "dotenv"
-dotenv.config()
 const app=express()
-import mongoose from "mongoose"
+import {connectionDB} from "./db"
+dotenv.config()
+
 import cors from "cors"
 
 
@@ -86,15 +89,20 @@ app.delete("/users/:id",async(req:Request,res:Response)=>{
 
 })
 
-const connectionDB=async(uri:string)=>{
-    return mongoose.connect(uri)
-            .then(()=>console.log("CONNECT TO DB...."))
-                .catch(err=>console.log(err))
+
+async function start(){
+  try{
+    if(process.env.MONGO_URI){
+      await connectionDB(process.env.MONGO_URI)
+      app.listen(PORT,()=>console.log("SERVER RUNNING"))
+
+    }
+  }catch(err){
+    console.log(err)
+  }
 }
 
-if(process.env.MONGO_URI)connectionDB(process.env.MONGO_URI)
-
-app.listen(PORT,()=>console.log("SERVER RUNNING"))
+start()
 
 export default app;
 
