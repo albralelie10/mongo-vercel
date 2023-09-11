@@ -11,10 +11,19 @@ app.get("/",(req:Request,res:Response)=>{
     return res.send("Home page")
 })
 
-if(process.env.MONGO_URI){
-     connectionDB(process.env.MONGO_URI)
-}
-app.listen(PORT,()=>console.log("SERVER RUNNING"))
+async function start(){
+    try{
+        if(process.env.MONGO_URI){
+            await connectionDB(process.env.MONGO_URI)
+            app.listen(PORT,()=>console.log("SERVER RUNNING"))
+        }
+    }catch(err){
 
+    }
+}
+
+start();
+
+export default app;
 
 

@@ -5,10 +5,7 @@
         "strict":true,
         "outDir":"dist",
         "esModuleInterop": true,
-        "target": "esnext",
-        "module": "commonjs",
-        "forceConsistentCasingInFileNames": true,
-        "skipLibCheck": true,
+        
 
 
     },
