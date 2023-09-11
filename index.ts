@@ -55,6 +55,17 @@ app.post("/users",async(req:Request,res:Response)=>{
       }
 })
 
+app.delete("/users/:id",async(req:Request,res:Response)=>{
+    try{
+      const {id}=req.params;
+        const deleteUser=await User.findOneAndDelete({_id:id})
+      return res.status(200).json(deleteUser)
+    }catch(err){
+      return res.status(500).json(err)
+    }
+
+})
+
 const connectionDB=async(uri:string)=>{
     return mongoose.connect(uri)
             .then(()=>console.log("CONNECT TO DB...."))
