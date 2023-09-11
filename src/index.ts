@@ -1,8 +1,8 @@
 import express, { Request, Response } from "express"
 const PORT=process.env.PORT || 3000
 import dotenv from "dotenv"
-import {connectionDB} from "./src/db/db"
-import router from "./src/router/router"
+import {connectionDB} from "./db/db"
+import router from "./router/router"
 dotenv.config()
 
 const app=express()
