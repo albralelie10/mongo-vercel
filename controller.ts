@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import {User,UserConfig,Post,Category} from "../models/model"
+import {User,UserConfig,Post,Category} from "./model"
 
 
 export const getAllUsers=async(req:Request,res:Response)=>{

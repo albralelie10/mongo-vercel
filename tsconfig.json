@@ -4,13 +4,16 @@
         "lib":["esnext"],
         "strict":true,
         "outDir":"dist",
-        "esModuleInterop": true
-    
+        "esModuleInterop": true,
+        "target": "esnext",
+        "module": "commonjs",
+        "forceConsistentCasingInFileNames": true,
+        "skipLibCheck": true,
+
+
     },
     "include":[
         "./api/*.ts",
-        "src/**/*.ts",
-        "test/**/*.ts",
         "/**/*.ts",
         "index.ts "
     ],
