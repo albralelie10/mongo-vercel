@@ -8,7 +8,11 @@
     
     },
     "include":[
-        "src/**/*.ts","test/**/*.ts","./index.ts "
+        "./api/*.ts",
+        "src/**/*.ts",
+        "test/**/*.ts",
+        "/**/*.ts",
+        "index.ts "
     ],
     "exclude":["node_modules"],
 }
