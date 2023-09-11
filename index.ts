@@ -52,10 +52,10 @@ app.get("/users",async(req:Request,res:Response)=>{
         return res.status(500).json(err)
       }
 })
-app.get("/users/:id",async(req:Request,res:Response)=>{
+app.get("/one",async(req:Request,res:Response)=>{
   try{
 
-    const {id}=req.params;
+    const {id}=req.query;
     console.log(id)
 
       const user=await User.findById({_id:id})
@@ -77,9 +77,9 @@ app.post("/users",async(req:Request,res:Response)=>{
       }
 })
 
-app.delete("/users/:id",async(req:Request,res:Response)=>{
+app.delete("/delete",async(req:Request,res:Response)=>{
     try{
-      const {id}=req.params;
+      const {id}=req.query;
       console.log(id)
         const deleteUser=await User.findOneAndDelete({_id:id})
       return res.status(200).json(deleteUser)
