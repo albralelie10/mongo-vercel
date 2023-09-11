@@ -11,17 +11,22 @@ app.use(express.json())
     
 app.use("/",router)
 
-
 app.get("/",(req:Request,res:Response)=>{
     return res.send("Home page")
 })
 
-app.listen(PORT,async ()=>{
-  console.log("SERVER RUNNING")
-  if(process.env.MONGO_URI){
-    await connectionDB(process.env.MONGO_URI)
+async function start (){
+  try{
+    if(process.env.MONGO_URI){
+      await connectionDB(process.env.MONGO_URI)
+      app.listen(PORT, ()=>console.log("SERVER RUNNING"))
+    }
+  }catch(err){
   }
-})
+}
+
+start()
+
 
 export default app;
 
