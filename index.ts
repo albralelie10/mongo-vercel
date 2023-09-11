@@ -1,33 +1,69 @@
 import express, { Request, Response } from "express"
 const PORT=process.env.PORT || 3000
-import {connectionDB} from "./connection"
 import dotenv from "dotenv"
-import router from "./routes"
 dotenv.config()
 const app=express()
-
+import mongoose from "mongoose"
 
 app.use(express.json())
 app.use(express.urlencoded({extended:false}))
-app.use("/api/v1",router)
+
+const userSchema= new mongoose.Schema({
+    email:{
+        type:String
+    },
+    pass:{
+        type:String
+    }
+})
+
+const User=mongoose.model("user",userSchema)
+
+export const getAllUsers=async(req:Request,res:Response)=>{
+    try{
+      const users=await User.find() 
+      console.log(users)
+      return res.json(users)
+    }catch(err){  
+      return res.status(500).json(err)
+    }
+  }
+ 
 
 app.get("/",(req:Request,res:Response)=>{
     return res.send("Home page")
 })
 
-
-async function start(){
+app.get("/users",async(req:Request,res:Response)=>{
     try{
-        if(process.env.MONGO_URI){
-            await connectionDB(process.env.MONGO_URI)
-            app.listen(PORT,()=>console.log("SERVER RUNNING"))
-        }
-    }catch(err){
+        const users=await User.find() 
+        return res.json(users)
+      }catch(err){  
+        return res.status(500).json(err)
+      }
+})
 
-    }
+app.post("/users",async(req:Request,res:Response)=>{
+    try{
+        const {nombre,email}=req.body
+        const newUser= await User.create(req.body)
+  
+        return res.status(201).json(newUser);
+  
+      }catch(err){
+          return res.status(500).json(err)
+      }
+})
+
+const connectionDB=async(uri:string)=>{
+    return mongoose.connect(uri)
+            .then(()=>console.log("CONNECT TO DB...."))
+                .catch(err=>console.log(err))
 }
 
-start();
+if(process.env.MONGO_URI)connectionDB(process.env.MONGO_URI)
+
+app.listen(PORT,()=>console.log("SERVER RUNNING"))
 
 export default app;
 
