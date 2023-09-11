@@ -1,8 +1,8 @@
 import express, { Request, Response } from "express"
 const PORT=process.env.PORT || 3000
 import dotenv from "dotenv"
-import {connectionDB} from "./db/db"
-import createServer from "./utils/server"
+import {connectionDB} from "./src/db/db"
+import createServer from "./src/utils/server"
 
 dotenv.config()
 
