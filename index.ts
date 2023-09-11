@@ -51,7 +51,10 @@ app.get("/users",async(req:Request,res:Response)=>{
 })
 app.get("/users/:id",async(req:Request,res:Response)=>{
   try{
+
     const {id}=req.params;
+    console.log(id)
+
       const user=await User.findById({_id:id})
     return res.status(200).json(user)
   }catch(err){
@@ -74,6 +77,7 @@ app.post("/users",async(req:Request,res:Response)=>{
 app.delete("/users/:id",async(req:Request,res:Response)=>{
     try{
       const {id}=req.params;
+      console.log(id)
         const deleteUser=await User.findOneAndDelete({_id:id})
       return res.status(200).json(deleteUser)
     }catch(err){
