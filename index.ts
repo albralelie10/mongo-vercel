@@ -8,15 +8,9 @@ import {connectionDB} from "./db"
 dotenv.config()
 import cors from "cors"
 
-app.use(helmet())
 
-app.use(cors({
-    origin:"*",
-    methods:["GET","DELETE","PUT","POST","OPTIONS"]
-}))
 
 app.use(express.json())
-app.use(express.urlencoded({extended:false}))
 
 const userSchema= new mongoose.Schema({
     email:{
