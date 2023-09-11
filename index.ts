@@ -2,11 +2,15 @@ import express, { Request, Response } from "express"
 const PORT=process.env.PORT || 3000
 import dotenv from "dotenv"
 import {connectionDB} from "./src/db/db"
-import createServer from "./src/utils/server"
-
+import router from "./src/router/router"
 dotenv.config()
 
-const app=createServer()
+const app=express()
+
+app.use(express.json())
+    
+app.use("/",router)
+
 
 app.get("/",(req:Request,res:Response)=>{
     return res.send("Home page")
