@@ -6,6 +6,7 @@ export const getAllUsers=async(req:Request,res:Response)=>{
   try{
     console.log("hello")
     const users=await User.find() 
+    console.log(users)
     return res.json(users)
   }catch(err){  
     return res.status(500).json(err)

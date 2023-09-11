@@ -1,5 +1,5 @@
 import  { Request, Response } from "express"
-const PORT=3000||process.env.PORT
+const PORT=process.env.PORT||3000
 import {connectionDB} from "./src/db/connection"
 import dotenv from "dotenv"
 import createServer from "./src/utils/server"
