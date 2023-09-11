@@ -1,14 +1,14 @@
 import express, { Request, Response } from "express"
 import mongoose from "mongoose"
-
+import helmet from "helmet"
 const PORT=process.env.PORT || 3000
 import dotenv from "dotenv"
 const app=express()
 import {connectionDB} from "./db"
 dotenv.config()
-
 import cors from "cors"
 
+app.use(helmet())
 
 app.use(cors({
     origin:"*",
