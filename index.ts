@@ -4,6 +4,13 @@ import dotenv from "dotenv"
 dotenv.config()
 const app=express()
 import mongoose from "mongoose"
+import cors from "cors"
+
+
+app.use(cors({
+    origin:"*",
+    methods:["GET","DELETE","PUT","POST","OPTIONS"]
+}))
 
 app.use(express.json())
 app.use(express.urlencoded({extended:false}))
@@ -55,7 +62,6 @@ app.get("/users/:id",async(req:Request,res:Response)=>{
 
 app.post("/users",async(req:Request,res:Response)=>{
     try{
-        const {nombre,email}=req.body
         const newUser= await User.create(req.body)
   
         return res.status(201).json(newUser);
