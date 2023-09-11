@@ -1,13 +1,16 @@
-import express, { Request, Response } from "express"
+import  { Request, Response } from "express"
 const PORT=3000||process.env.PORT
-const app =express()
 import {connectionDB} from "./src/db/connection"
 import dotenv from "dotenv"
+import createServer from "./src/utils/server"
 dotenv.config()
+
+const app=createServer()
 
 app.get("/",(req:Request,res:Response)=>{
     return res.send("Home page")
 })
+
 
 const start=async()=>{
     try{
